@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Newtext from '../newText/newText';
+import Text from '../Text/Text';
 import './Textlist.css';
 const API_URL = 'https://5e8d7fc422d8cd0016a79566.mockapi.io/api/comments';
 
@@ -12,6 +13,7 @@ class Textlist extends React.Component{
             text: [],
         }
         this.create = this.create.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     async componentDidMount(){
@@ -30,12 +32,21 @@ class Textlist extends React.Component{
         })
     }
 
+
+    delete(id){
+       this.setState({
+            text: this.state.text.filter(e => e.id !== id)
+       });
+    }
+
+
  
     render(){
         const List = this.state.text.map(e => {
-            return <tr key={e.id}>
-                <td>{e.text}</td>
-            </tr>
+            return <Text 
+                        key={e.id}
+                        id={e.id}
+                        remove={this.delete}>{e.text}</Text>
         })
         return(
             <div className="container">
