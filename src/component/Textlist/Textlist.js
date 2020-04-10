@@ -14,6 +14,7 @@ class Textlist extends React.Component{
         }
         this.create = this.create.bind(this);
         this.delete = this.delete.bind(this);
+        this.update = this.update.bind(this);
     }
 
     async componentDidMount(){
@@ -39,6 +40,17 @@ class Textlist extends React.Component{
        });
     }
 
+    update(id, updated){
+        const update = this.state.text.map(text => {
+            if(text.id === id){
+                return {...text, text: updated}   
+            } return text;
+        });
+        this.setState({
+            text: update
+        })
+    }
+
 
  
     render(){
@@ -46,6 +58,7 @@ class Textlist extends React.Component{
             return <Text 
                         key={e.id}
                         id={e.id}
+                        update={this.update}
                         remove={this.delete}>{e.text}</Text>
         })
         return(
