@@ -59,8 +59,11 @@ class Textlist extends React.Component{
                         key={e.id}
                         id={e.id}
                         update={this.update}
-                        remove={this.delete}>{e.text}</Text>
+                        remove={this.delete}
+                        text={e.text}>{e.text}</Text>
         })
+        console.log(this.task);
+        console.log(this.state.text)
         return(
             <div className="container">
             <br />
